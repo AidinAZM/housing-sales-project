@@ -4,6 +4,8 @@ import { Option } from "antd/es/mentions";
 import axios from "axios";
 import { useContext, useState } from "react";
 import { MapContainer, Marker, TileLayer } from "react-leaflet";
+import markerIconPng from "leaflet/dist/images/marker-icon.png";
+import { Icon } from "leaflet";
 import { AdContext } from "../context/AdContext";
 import { useNavigate } from "react-router-dom";
 
@@ -259,6 +261,13 @@ function EditPage() {
               />
               <Marker
                 position={[markerPos.lat, markerPos.lng]}
+                icon={
+                  new Icon({
+                    iconUrl: markerIconPng,
+                    iconSize: [25, 41],
+                    iconAnchor: [12, 41],
+                  })
+                }
                 draggable
                 autoPan
                 eventHandlers={{

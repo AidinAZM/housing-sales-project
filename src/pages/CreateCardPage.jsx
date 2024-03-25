@@ -12,6 +12,8 @@ import { Option } from "antd/es/mentions";
 import axios from "axios";
 import { useState } from "react";
 import { MapContainer, Marker, TileLayer } from "react-leaflet";
+import markerIconPng from "leaflet/dist/images/marker-icon.png";
+import { Icon } from "leaflet";
 import { useNavigate } from "react-router-dom";
 const randNum = Math.floor(Math.random() * 1000);
 
@@ -263,6 +265,13 @@ function CreateCardPage() {
               />
               <Marker
                 position={[markerPos.lat, markerPos.lng]}
+                icon={
+                  new Icon({
+                    iconUrl: markerIconPng,
+                    iconSize: [25, 41],
+                    iconAnchor: [12, 41],
+                  })
+                }
                 draggable
                 autoPan
                 eventHandlers={{
