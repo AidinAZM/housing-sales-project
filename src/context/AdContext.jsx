@@ -3,8 +3,10 @@ import { createContext, useState } from "react";
 export const AdContext = createContext({
   setUser: () => {},
   getUser: () => {},
-  setAds: () => {},
-  getAds: () => {},
+  setUserAds: () => {},
+  getUserAds: () => {},
+  setData: () => {},
+  getData: () => {},
   changeDarkMode: () => {},
   getDarkMode: () => {},
 });
@@ -13,7 +15,8 @@ export const AdContext = createContext({
 export function AdProvider({ children }) {
   const [darkMode, setDarkMode] = useState(false);
   const [loggedInUser, setLoggedInUser] = useState({});
-  const [userAds, setUserAds] = useState([]);
+  const [loggedInUserAds, setLoggedInUserAds] = useState([]);
+  const [adsData, setAdsData] = useState([]);
 
   function changeDarkMode() {
     setDarkMode(!darkMode);
@@ -34,20 +37,31 @@ export function AdProvider({ children }) {
   }
 
   //set and get the Currently LoggedIn User's Ads
-  function setAds(adsArr) {
-    setUserAds(adsArr);
-    console.log("userAds:", userAds);
+  function setUserAds(adsArr) {
+    setLoggedInUserAds(adsArr);
+    console.log("userAds:", loggedInUserAds);
   }
 
-  function getAds() {
-    return userAds;
+  function getUserAds() {
+    return loggedInUserAds;
+  }
+
+  // data = an array state of all house objects that is shown in the MainPage.jsx
+  function setData(adsArr) {
+    setAdsData(adsArr);
+  }
+
+  function getData() {
+    return adsData;
   }
 
   const ContextValue = {
     setUser,
     getUser,
-    setAds,
-    getAds,
+    setUserAds,
+    getUserAds,
+    setData,
+    getData,
     changeDarkMode,
     getDarkMode,
   };

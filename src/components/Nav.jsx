@@ -8,6 +8,8 @@ import {
   Button,
   Drawer,
   Form,
+  Avatar,
+  AutoComplete,
 } from "antd";
 import { HomeOutlined, UserOutlined, MenuOutlined } from "@ant-design/icons";
 import { AdContext } from "../context/AdContext";
@@ -103,6 +105,28 @@ export default function Nav() {
     navigate("/userPage");
   };
 
+  let allSearchOptionsArr = [];
+  adv.getData().map((ad) => {
+    allSearchOptionsArr.push({
+      value: ad.id,
+      label: ad.houseName,
+    });
+  });
+
+  const [filteredOptions, setFilteredOptions] = useState([]);
+
+  const handleSearchChange = (data) => {
+    if (data != "") {
+      setFilteredOptions(
+        allSearchOptionsArr.filter((opt) => opt.label == data)
+      );
+    }
+  };
+
+  const handleSearchSelect = (adIndex) => {
+    navigate(`/house/${adIndex}`);
+  };
+
   return (
     <ConfigProvider direction="ltr">
       <Menu
@@ -112,6 +136,7 @@ export default function Nav() {
           position: "relative",
           display: "flex",
           marginTop: "20px",
+          minWidth: "400px",
         }}
         id="#Navbar"
       >
@@ -140,23 +165,36 @@ export default function Nav() {
               )}
             </>
           ) : (
-            <UserOutlined
-              style={{ fontSize: "23px", color: "#1B9C85" }}
-              onClick={handleUserPage}
+            <Avatar
+              style={{ backgroundColor: "#87d068" }}
+              icon={
+                <UserOutlined
+                  style={{
+                    fontSize: "23px",
+                  }}
+                  onClick={handleUserPage}
+                />
+              }
             />
           )}
         </Menu.Item>
 
         <Menu.Item key={"searchBar"} disabled>
           <Space>
-            <Search
-              dir="rtl"
-              placeholder="نام خانه موردنظر را وارد کنید..."
-              onSearch={onSearch}
-              className={isFocused ? "searchBar-focused" : "searchBar"}
-              onFocus={() => setIsFocused(true)}
-              onBlur={() => setIsFocused(false)}
-            />
+            <AutoComplete
+              options={filteredOptions}
+              onSelect={handleSearchSelect}
+              onChange={handleSearchChange}
+            >
+              <Search
+                dir="rtl"
+                placeholder="نام خانه موردنظر را وارد کنید..."
+                onSearch={onSearch}
+                className={isFocused ? "searchBar-focused" : "searchBar"}
+                onFocus={() => setIsFocused(true)}
+                onBlur={() => setIsFocused(false)}
+              />
+            </AutoComplete>
           </Space>
         </Menu.Item>
         <Menu.Item

@@ -17,48 +17,16 @@ export default function MainPage() {
   const navigate = useNavigate();
   const adv = useContext(AdContext);
 
-  // data = an array state of all house objects that is shown in the MainPage.jsx
-  const [data, setData] = useState([]);
-
   const [sortBy, setSortBy] = useState("");
 
   const [filterBy, setFilterBy] = useState("");
 
-  useEffect(
-    function () {
-      if (setSortBy === "") {
-        axios.get("http://localhost:3000/house").then((res) => {
-          setData(res.data);
-        });
-      } else if (sortBy === "ascendingPrice") {
-        axios.get("http://localhost:3000/house?_sort=price").then((res) => {
-          setData(res.data);
-        });
-      } else if (sortBy === "descendingPrice") {
-        axios
-          .get("http://localhost:3000/house?_sort=price_order=desc")
-          .then((res) => {
-            setData(res.data);
-          });
-      } else if (sortBy === "ascendingMeterage") {
-        axios
-          .get("http://localhost:3000/house?_sort=houseMeterage")
-          .then((res) => {
-            setData(res.data);
-          });
-      } else if (sortBy === "descendingMeterage") {
-        axios
-          .get("http://localhost:3000/house?_sort=houseMeterage_order=desc")
-          .then((res) => {
-            setData(res.data);
-          });
-      }
-    },
-    [sortBy]
-  );
-
   const handleSort = (value) => {
     setSortBy(value);
+  };
+
+  const handleCityFilter = (selectedCity) => {
+    setFilterBy(selectedCity);
   };
 
   useEffect(
@@ -67,20 +35,49 @@ export default function MainPage() {
         axios
           .get(`http://localhost:3000/house?city=${filterBy}`)
           .then((response) => {
-            setData(response.data);
+            adv.setData(response.data);
           });
       } else if (filterBy === "") {
         axios.get("http://localhost:3000/house").then((response) => {
-          setData(response.data);
+          adv.setData(response.data);
         });
       }
     },
     [filterBy]
   );
 
-  const handleCityFilter = (selectedCity) => {
-    setFilterBy(selectedCity);
-  };
+  useEffect(
+    function () {
+      if (setSortBy === "") {
+        adv.setData(adv.getData());
+      } else if (sortBy === "ascendingPrice") {
+        adv.setData(
+          adv.getData().sort((a, b) => {
+            return a.price - b.price;
+          })
+        );
+      } else if (sortBy === "descendingPrice") {
+        adv.setData(
+          adv.getData().sort((a, b) => {
+            return b.price - a.price;
+          })
+        );
+      } else if (sortBy === "ascendingMeterage") {
+        adv.setData(
+          adv.getData().sort((a, b) => {
+            return a.houseMeterage - b.houseMeterage;
+          })
+        );
+      } else if (sortBy === "descendingMeterage") {
+        adv.setData(
+          adv.getData().sort((a, b) => {
+            return b.houseMeterage - a.houseMeterage;
+          })
+        );
+      }
+    },
+    [sortBy]
+  );
 
   useEffect(
     function () {
@@ -101,7 +98,7 @@ export default function MainPage() {
     adv.changeDarkMode();
   };
   return (
-    <>
+    <div>
       <Nav />
       <div className="container">
         <div style={{ justifyContent: "space-between", display: "flex" }}>
@@ -184,7 +181,7 @@ export default function MainPage() {
         </div>
 
         <Row justify={"center"} className="mt-4">
-          {data.map((house) => {
+          {adv.getData().map((house) => {
             return (
               <Col
                 xs={8}
@@ -192,7 +189,7 @@ export default function MainPage() {
                 md={6}
                 lg={6}
                 xl={4}
-                className="mx-5 mt-3"
+                className="mx-5 mt-3 px-5"
                 style={{ display: "flex", justifyContent: "center" }}
                 key={house.id}
               >
@@ -223,6 +220,6 @@ export default function MainPage() {
         style={{ backgroundColor: "#C4DFDF" }}
         onClick={handleDarkMode}
       />
-    </>
+    </div>
   );
 }

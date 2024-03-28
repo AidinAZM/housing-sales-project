@@ -12,7 +12,7 @@ function UserPage() {
     axios
       .get(`http://localhost:3000/house?ownerName=${adv.getUser().username}`)
       .then((res) => {
-        adv.setAds(res.data);
+        adv.setUserAds(res.data);
       });
   }, []);
 
@@ -54,7 +54,7 @@ function UserPage() {
     navigate("/");
   };
 
-  adv.getAds().map((ad) => {
+  adv.getUserAds().map((ad) => {
     data.push({
       key: ad.houseName,
       houseName: ad.houseName,

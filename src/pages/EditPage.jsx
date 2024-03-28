@@ -25,8 +25,8 @@ function EditPage() {
     console.log("Current User:", adv.getUser());
     axios
       .put(`http://localhost:3000/house/${adv.getAds()[0].id}`, {
-        id: adv.getAds()[0].id,
-        houseName: `House ${adv.getAds()[0].id}`,
+        id: adv.getUserAds()[0].id,
+        houseName: `House ${adv.getUserAds()[0].id}`,
         price: values.price,
         imageAddress: "/outHouse1.jpg",
         imageAddress2: "/inHouse1.jpg",
@@ -88,7 +88,7 @@ function EditPage() {
               },
             ]}
           >
-            <Input placeholder={adv.getAds()[0].ownerName} />
+            <Input defaultValue={adv.getUserAds()[0].ownerName} />
           </Form.Item>
 
           <Form.Item
@@ -105,7 +105,7 @@ function EditPage() {
               },
             ]}
           >
-            <Input placeholder={adv.getAds()[0].ownerMail} />
+            <Input defaultValue={adv.getUserAds()[0].ownerMail} />
           </Form.Item>
           <Form.Item
             label="تلفن همراه"
@@ -118,7 +118,7 @@ function EditPage() {
               },
             ]}
           >
-            <Input placeholder={adv.getAds()[0].ownerTel} />
+            <Input defaultValue={adv.getUserAds()[0].ownerTel} />
           </Form.Item>
           <Form.Item
             label="شهر"
@@ -130,7 +130,7 @@ function EditPage() {
               },
             ]}
           >
-            <Input placeholder={adv.getAds()[0].city} />
+            <Input defaultValue={adv.getUserAds()[0].city} />
           </Form.Item>
           <Form.Item
             label="محله"
@@ -142,7 +142,7 @@ function EditPage() {
               },
             ]}
           >
-            <Input placeholder={adv.getAds()[0].neighbourhood} />
+            <Input defaultValue={adv.getUserAds()[0].neighbourhood} />
           </Form.Item>
           <Form.Item
             label="قیمت"
@@ -154,7 +154,7 @@ function EditPage() {
               },
             ]}
           >
-            <Input placeholder={adv.getAds()[0].price} />
+            <Input defaultValue={adv.getUserAds()[0].price} />
           </Form.Item>
           <Form.Item
             label="متراژ خانه"
@@ -166,7 +166,7 @@ function EditPage() {
               },
             ]}
           >
-            <Input placeholder={adv.getAds()[0].houseMeterage} />
+            <Input defaultValue={adv.getUserAds()[0].houseMeterage} />
           </Form.Item>
           <Form.Item
             label="تعداد اتاق خواب"
@@ -178,7 +178,7 @@ function EditPage() {
               },
             ]}
           >
-            <Input placeholder={adv.getAds()[0].bedroomsNum} />
+            <Input defaultValue={adv.getUserAds()[0].bedroomsNum} />
           </Form.Item>
           <Form.Item
             label="پارکینگ"
@@ -190,7 +190,7 @@ function EditPage() {
               },
             ]}
           >
-            <Select defaultValue={adv.getAds()[0].hasParkingSpot}>
+            <Select defaultValue={adv.getUserAds()[0].hasParkingSpot}>
               <Option value="true">دارد</Option>
               <Option value="false">ندارد</Option>
             </Select>
@@ -205,7 +205,7 @@ function EditPage() {
               },
             ]}
           >
-            <Select defaultValue={adv.getAds()[0].hasWarehouse}>
+            <Select defaultValue={adv.getUserAds()[0].hasWarehouse}>
               <Option value="true">دارد</Option>
               <Option value="false">ندارد</Option>
             </Select>
@@ -220,11 +220,11 @@ function EditPage() {
               },
             ]}
           >
-            <Input placeholder={adv.getAds()[0].floorNum} />
+            <Input defaultValue={adv.getUserAds()[0].floorNum} />
           </Form.Item>
           <Form.Item
             label="سال ساخت"
-            name="BuildYear"
+            name="buildYear"
             rules={[
               {
                 required: true,
@@ -232,7 +232,7 @@ function EditPage() {
               },
             ]}
           >
-            <Input placeholder={adv.getAds()[0].buildYear} />
+            <Input defaultValue={adv.getUserAds()[0].buildYear} />
           </Form.Item>
           <Form.Item
             label="آدرس"
@@ -244,13 +244,13 @@ function EditPage() {
               },
             ]}
           >
-            <TextArea placeholder={adv.getAds()[0].Address} />
+            <Input.TextArea defaultValue={adv.getUserAds()[0].Address} />
           </Form.Item>
           <Form.Item>
             <MapContainer
               center={[
-                adv.getAds()[0].locationLat,
-                adv.getAds()[0].locationLng,
+                adv.getUserAds()[0].locationLat,
+                adv.getUserAds()[0].locationLng,
               ]}
               zoom={13}
               style={{ right: 50, width: "500px" }}
