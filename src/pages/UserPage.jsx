@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useContext, useEffect } from "react";
 import { AdContext } from "../context/AdContext";
-import { Descriptions, Table, message } from "antd";
+import { Button, Descriptions, Table, message } from "antd";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 
@@ -54,6 +54,13 @@ function UserPage() {
     navigate("/");
   };
 
+  const handleLogOutBtnClick = () => {
+    adv.setUser(null);
+    navigate("/");
+    message.success("با موفقیت از حساب کاربری خود خارج شدید");
+    window.localStorage.clear();
+  };
+
   adv.getUserAds().map((ad) => {
     data.push({
       key: ad.houseName,
@@ -90,7 +97,10 @@ function UserPage() {
         </Descriptions.Item>
       </Descriptions>
       <h5 style={{ marginTop: "20px", padding: "15px" }}>User Ads</h5>
-      <Table columns={columns} dataSource={data} />;
+      <Table columns={columns} dataSource={data} />
+      <Button type="danger" onClick={handleLogOutBtnClick}>
+        Log Out
+      </Button>
     </div>
   );
 }

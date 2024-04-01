@@ -1,4 +1,5 @@
-import { createContext, useState } from "react";
+import axios from "axios";
+import { createContext, useEffect, useState } from "react";
 
 export const AdContext = createContext({
   setUser: () => {},
@@ -29,7 +30,6 @@ export function AdProvider({ children }) {
   // set and get the Currently loggedIn User
   function setUser(userData) {
     setLoggedInUser(userData);
-    console.log("userData:", userData);
   }
 
   function getUser() {
@@ -39,7 +39,6 @@ export function AdProvider({ children }) {
   //set and get the Currently LoggedIn User's Ads
   function setUserAds(adsArr) {
     setLoggedInUserAds(adsArr);
-    console.log("userAds:", loggedInUserAds);
   }
 
   function getUserAds() {

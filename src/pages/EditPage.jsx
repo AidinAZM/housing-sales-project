@@ -14,8 +14,8 @@ function EditPage() {
   const adv = useContext(AdContext);
 
   const [markerPos, setMarkerPos] = useState({
-    lat: adv.getAds()[0].locationLat,
-    lng: adv.getAds()[0].locationLng,
+    lat: adv.getUserAds()[0].locationLat,
+    lng: adv.getUserAds()[0].locationLng,
   });
 
   const navigate = useNavigate();

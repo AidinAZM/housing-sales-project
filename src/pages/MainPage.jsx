@@ -1,4 +1,4 @@
-import { Col, ConfigProvider, FloatButton, Row, Select } from "antd";
+import { Col, ConfigProvider, Empty, FloatButton, Row, Select } from "antd";
 import ProductCard from "../components/ProductCard";
 import { useContext, useEffect, useState } from "react";
 import {
@@ -20,6 +20,7 @@ export default function MainPage() {
   const [sortBy, setSortBy] = useState("");
 
   const [filterBy, setFilterBy] = useState("");
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
 
   const handleSort = (value) => {
     setSortBy(value);
@@ -97,6 +98,7 @@ export default function MainPage() {
   const handleDarkMode = () => {
     adv.changeDarkMode();
   };
+
   return (
     <div>
       <Nav />
@@ -180,23 +182,31 @@ export default function MainPage() {
           </div>
         </div>
 
-        <Row justify={"center"} className="mt-4">
-          {adv.getData().map((house) => {
-            return (
-              <Col
-                xs={8}
-                sm={6}
-                md={6}
-                lg={6}
-                xl={4}
-                className="mx-5 mt-3 px-5"
-                style={{ display: "flex", justifyContent: "center" }}
-                key={house.id}
-              >
-                <ProductCard key={house.id} data={house} />
-              </Col>
-            );
-          })}
+        <Row justify={"center"} className="mx-5 px-5 mt-3">
+          {adv.getData()[0] == undefined ? (
+            <Empty
+              style={{ padding: "100px" }}
+              description={<span>خانه ای با این مشخصات وجود ندارد</span>}
+            />
+          ) : (
+            adv.getData().map((house) => {
+              return (
+                <Col
+                  xs={8}
+                  sm={6}
+                  md={6}
+                  lg={6}
+                  xl={4}
+                  className="mx-5 mt-3 px-5"
+                  style={{ display: "flex", justifyContent: "center" }}
+                  key={house.id}
+                >
+                  <ProductCard key={house.id} data={house} />
+                </Col>
+              );
+            })
+          )}
+          {}
         </Row>
       </div>
       <ConfigProvider direction="ltr">
@@ -205,7 +215,11 @@ export default function MainPage() {
           description="ثبت آگهی جدید"
           shape="square"
           type="default"
-          style={{ height: "40px", width: "100px", backgroundColor: "#C4DFDF" }}
+          style={{
+            height: "40px",
+            width: "100px",
+            backgroundColor: "#C4DFDF",
+          }}
           onClick={() => navigate("/createNewAd")}
         />
       </ConfigProvider>

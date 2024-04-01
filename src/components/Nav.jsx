@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import {
   Menu,
   ConfigProvider,
@@ -35,7 +35,6 @@ export default function Nav() {
 
   const [isRegisterForm, setIsRegisterForm] = useState(false);
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const handleRegister = () => {
     setIsRegisterForm(true);
   };
@@ -67,10 +66,13 @@ export default function Nav() {
               res.data[0]?.username == values.username &&
               res.data[0]?.password == values.password
             ) {
-              console.log(res.data[0]);
               message.success("با موفقیت وارد شدید");
-              setIsLoggedIn(true);
               adv.setUser(res.data[0]);
+              setIsUserLoggedIn(true);
+              window.localStorage.setItem(
+                "userLoggedIn",
+                JSON.stringify(res.data[0])
+              );
             } else {
               message.error("نام کاربری یا رمز عبور اشتباه است");
             }
@@ -97,7 +99,6 @@ export default function Nav() {
     handleLoginState;
   };
 
-  const onSearch = (value) => console.log(value);
   const [isFocused, setIsFocused] = useState(false);
 
   const navigate = useNavigate();
@@ -127,6 +128,19 @@ export default function Nav() {
     navigate(`/house/${adIndex}`);
   };
 
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+
+  useEffect(function () {
+    if (
+      window.localStorage.getItem("userLoggedIn") &&
+      isUserLoggedIn == false
+    ) {
+      setIsUserLoggedIn(true);
+      let user = JSON.parse(window.localStorage.getItem("userLoggedIn"));
+      adv.setUser(user);
+    }
+  }, []);
+
   return (
     <ConfigProvider direction="ltr">
       <Menu
@@ -143,9 +157,8 @@ export default function Nav() {
         <Menu.Item
           key={"userAcc"}
           style={{ position: "absolute", top: 0, left: 0 }}
-          className="responsivNav"
         >
-          {!isLoggedIn ? (
+          {!isUserLoggedIn ? (
             <>
               <UserOutlined
                 style={{ fontSize: "23px" }}
@@ -189,7 +202,7 @@ export default function Nav() {
               <Search
                 dir="rtl"
                 placeholder="نام خانه موردنظر را وارد کنید..."
-                onSearch={onSearch}
+                onSearch={handleSearchChange}
                 className={isFocused ? "searchBar-focused" : "searchBar"}
                 onFocus={() => setIsFocused(true)}
                 onBlur={() => setIsFocused(false)}
