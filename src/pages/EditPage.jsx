@@ -1,5 +1,4 @@
 import { Button, ConfigProvider, Divider, Form, Input, Select } from "antd";
-import TextArea from "antd/es/input/TextArea";
 import { Option } from "antd/es/mentions";
 import axios from "axios";
 import { useContext, useState } from "react";
@@ -78,17 +77,8 @@ function EditPage() {
           onFinishFailed={onFinishFailed}
           autoComplete="off"
         >
-          <Form.Item
-            label="نام صاحب ملک"
-            name="ownername"
-            rules={[
-              {
-                required: true,
-                message: "Please input your username!",
-              },
-            ]}
-          >
-            <Input defaultValue={adv.getUserAds()[0].ownerName} />
+          <Form.Item label="نام صاحب ملک" name="ownername">
+            <Input defaultValue={adv.getUserAds()[0].ownerName} disabled />
           </Form.Item>
 
           <Form.Item
@@ -154,7 +144,7 @@ function EditPage() {
               },
             ]}
           >
-            <Input defaultValue={adv.getUserAds()[0].price} />
+            <Input defaultValue={adv.getUserAds()[0].price} type="number" />
           </Form.Item>
           <Form.Item
             label="متراژ خانه"
@@ -166,7 +156,10 @@ function EditPage() {
               },
             ]}
           >
-            <Input defaultValue={adv.getUserAds()[0].houseMeterage} />
+            <Input
+              defaultValue={adv.getUserAds()[0].houseMeterage}
+              type="number"
+            />
           </Form.Item>
           <Form.Item
             label="تعداد اتاق خواب"
@@ -178,7 +171,10 @@ function EditPage() {
               },
             ]}
           >
-            <Input defaultValue={adv.getUserAds()[0].bedroomsNum} />
+            <Input
+              defaultValue={adv.getUserAds()[0].bedroomsNum}
+              type="number"
+            />
           </Form.Item>
           <Form.Item
             label="پارکینگ"
@@ -211,7 +207,7 @@ function EditPage() {
             </Select>
           </Form.Item>
           <Form.Item
-            label="Floor"
+            label="طبقه"
             name="floor"
             rules={[
               {

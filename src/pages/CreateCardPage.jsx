@@ -10,15 +10,17 @@ import {
 import TextArea from "antd/es/input/TextArea";
 import { Option } from "antd/es/mentions";
 import axios from "axios";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { MapContainer, Marker, TileLayer } from "react-leaflet";
 import markerIconPng from "leaflet/dist/images/marker-icon.png";
 import { Icon } from "leaflet";
 import { useNavigate } from "react-router-dom";
+import { AdContext } from "../context/AdContext";
 const randNum = Math.floor(Math.random() * 1000);
 
 // Initialize the Position State of the Marker
 function CreateCardPage() {
+  const adv = useContext(AdContext);
   const [markerPos, setMarkerPos] = useState({
     lat: 35.7219,
     lng: 51.3347,
@@ -88,14 +90,9 @@ function CreateCardPage() {
           <Form.Item
             label="نام صاحب ملک"
             name="ownername"
-            rules={[
-              {
-                required: true,
-                message: "Please input your username!",
-              },
-            ]}
+            initialValue={adv.getUser().username}
           >
-            <Input />
+            <Input disabled />
           </Form.Item>
 
           <Form.Item
@@ -117,7 +114,6 @@ function CreateCardPage() {
           <Form.Item
             label="تلفن همراه"
             name="ownerNumber"
-            initialValue="09123456789"
             rules={[
               {
                 required: true,
@@ -125,7 +121,7 @@ function CreateCardPage() {
               },
             ]}
           >
-            <Input />
+            <Input placeholder="09123456789" />
           </Form.Item>
           <Form.Item
             label="شهر"
@@ -161,7 +157,7 @@ function CreateCardPage() {
               },
             ]}
           >
-            <Input />
+            <Input type="number" />
           </Form.Item>
           <Form.Item
             label="متراژ خانه"
@@ -173,7 +169,7 @@ function CreateCardPage() {
               },
             ]}
           >
-            <Input />
+            <Input type="number" />
           </Form.Item>
           <Form.Item
             label="تعداد اتاق خواب"
@@ -185,7 +181,7 @@ function CreateCardPage() {
               },
             ]}
           >
-            <Input />
+            <Input type="number" />
           </Form.Item>
           <Form.Item
             label="پارکینگ"
@@ -218,7 +214,7 @@ function CreateCardPage() {
             </Select>
           </Form.Item>
           <Form.Item
-            label="Floor"
+            label="طبقه"
             name="floor"
             rules={[
               {
@@ -294,7 +290,7 @@ function CreateCardPage() {
             }}
           >
             <Button type="primary" htmlType="submit">
-              Submit
+              ثبت آگهی
             </Button>
           </Form.Item>
         </Form>

@@ -1,5 +1,4 @@
-import axios from "axios";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 
 export const AdContext = createContext({
   setUser: () => {},
@@ -15,7 +14,7 @@ export const AdContext = createContext({
 // eslint-disable-next-line react/prop-types
 export function AdProvider({ children }) {
   const [darkMode, setDarkMode] = useState(false);
-  const [loggedInUser, setLoggedInUser] = useState({});
+  const [loggedInUser, setLoggedInUser] = useState(null);
   const [loggedInUserAds, setLoggedInUserAds] = useState([]);
   const [adsData, setAdsData] = useState([]);
 

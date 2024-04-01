@@ -1,4 +1,12 @@
-import { Col, ConfigProvider, Empty, FloatButton, Row, Select } from "antd";
+import {
+  Col,
+  ConfigProvider,
+  Empty,
+  FloatButton,
+  Row,
+  Select,
+  message,
+} from "antd";
 import ProductCard from "../components/ProductCard";
 import { useContext, useEffect, useState } from "react";
 import {
@@ -18,9 +26,7 @@ export default function MainPage() {
   const adv = useContext(AdContext);
 
   const [sortBy, setSortBy] = useState("");
-
   const [filterBy, setFilterBy] = useState("");
-  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
 
   const handleSort = (value) => {
     setSortBy(value);
@@ -99,6 +105,14 @@ export default function MainPage() {
     adv.changeDarkMode();
   };
 
+  const handleCreateNewAdBtn = () => {
+    if (adv.getUser() == null) {
+      message.error("برای ثبت آگهی باید وارد حساب کاربری خود شوید");
+    } else {
+      navigate("/createNewAd");
+    }
+  };
+
   return (
     <div>
       <Nav />
@@ -153,27 +167,27 @@ export default function MainPage() {
                   ),
                 },
                 {
-                  value: "Tehran",
+                  value: "تهران",
                   label: "تهران",
                 },
                 {
-                  value: "Fuman",
+                  value: "فومن",
                   label: "فومن",
                 },
                 {
-                  value: "Shiraz",
+                  value: "شیراز",
                   label: "شیراز",
                 },
                 {
-                  value: "Rasht",
+                  value: "رشت",
                   label: "رشت",
                 },
                 {
-                  value: "Mashhad",
+                  value: "مشهد",
                   label: "مشهد",
                 },
                 {
-                  value: "Isfahan",
+                  value: "اصفهان",
                   label: "اصفهان",
                 },
               ]}
@@ -220,7 +234,7 @@ export default function MainPage() {
             width: "100px",
             backgroundColor: "#C4DFDF",
           }}
-          onClick={() => navigate("/createNewAd")}
+          onClick={handleCreateNewAdBtn}
         />
       </ConfigProvider>
       <FloatButton

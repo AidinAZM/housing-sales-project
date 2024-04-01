@@ -10,39 +10,44 @@ import {
   Form,
   Avatar,
   AutoComplete,
+  Dropdown,
 } from "antd";
-import { HomeOutlined, UserOutlined, MenuOutlined } from "@ant-design/icons";
+import {
+  HomeOutlined,
+  UserOutlined,
+  MenuOutlined,
+  LogoutOutlined,
+} from "@ant-design/icons";
 import { AdContext } from "../context/AdContext";
 import Search from "antd/es/input/Search";
 import LoginForm from "./LoginForm";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Nav() {
   const adv = useContext(AdContext);
 
   // states of Opening and Closing the Drawer
   const [open, setOpen] = useState(false);
+  //states for Login modal
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [isRegisterForm, setIsRegisterForm] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
+  const [filteredOptions, setFilteredOptions] = useState([]);
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+
   const showDrawer = () => {
     setOpen(true);
   };
   const onClose = () => {
     setOpen(false);
   };
-
-  //states for Login modal
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-
-  const [isRegisterForm, setIsRegisterForm] = useState(false);
-
   const handleRegister = () => {
     setIsRegisterForm(true);
   };
-
   const handleLoginState = () => {
     setIsRegisterForm(false);
   };
-
   const handleLoginModal = () => {
     setIsLoginModalOpen(true);
     setOpen(false);
@@ -78,16 +83,20 @@ export default function Nav() {
             }
           });
       } else if (values.email != undefined) {
-        axios
-          .post("http://localhost:3000/users", {
-            username: values.username,
-            password: values.password,
-            email: values.email,
-          })
-          .then((res) => {
-            console.log(res);
-          });
-        message.success("ثبت نام با موفقیت انجام شد");
+        if (values.passwordCheck == values.password) {
+          axios
+            .post("http://localhost:3000/users", {
+              username: values.username,
+              password: values.password,
+              email: values.email,
+            })
+            .then((res) => {
+              console.log(res);
+            });
+          message.success("ثبت نام با موفقیت انجام شد");
+        } else if (values.passwordCheck != values.password) {
+          message.error("رمز عبور به درستی تکرار نشده است");
+        }
       }
       handleRegister;
       setIsLoginModalOpen(false);
@@ -99,12 +108,7 @@ export default function Nav() {
     handleLoginState;
   };
 
-  const [isFocused, setIsFocused] = useState(false);
-
   const navigate = useNavigate();
-  const handleUserPage = () => {
-    navigate("/userPage");
-  };
 
   let allSearchOptionsArr = [];
   adv.getData().map((ad) => {
@@ -113,8 +117,6 @@ export default function Nav() {
       label: ad.houseName,
     });
   });
-
-  const [filteredOptions, setFilteredOptions] = useState([]);
 
   const handleSearchChange = (data) => {
     if (data != "") {
@@ -128,8 +130,6 @@ export default function Nav() {
     navigate(`/house/${adIndex}`);
   };
 
-  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
-
   useEffect(function () {
     if (
       window.localStorage.getItem("userLoggedIn") &&
@@ -140,6 +140,30 @@ export default function Nav() {
       adv.setUser(user);
     }
   }, []);
+
+  const handleLogOutBtnClick = () => {
+    adv.setUser(null);
+    setIsUserLoggedIn(false);
+    message.success("با موفقیت از حساب کاربری خود خارج شدید");
+    window.localStorage.clear();
+  };
+
+  const items = [
+    {
+      key: "1",
+      label: <Link to={"/userPage"}>آگهی های من</Link>,
+    },
+
+    {
+      key: "2",
+      danger: true,
+      label: (
+        <Link to={"/"} onClick={handleLogOutBtnClick}>
+          خروج از حساب کاربری <LogoutOutlined />
+        </Link>
+      ),
+    },
+  ];
 
   return (
     <ConfigProvider direction="ltr">
@@ -178,17 +202,20 @@ export default function Nav() {
               )}
             </>
           ) : (
-            <Avatar
-              style={{ backgroundColor: "#87d068" }}
-              icon={
-                <UserOutlined
-                  style={{
-                    fontSize: "23px",
-                  }}
-                  onClick={handleUserPage}
+            <ConfigProvider direction="rtl">
+              <Dropdown menu={{ items }} placement="bottom">
+                <Avatar
+                  style={{ backgroundColor: "#87d068" }}
+                  icon={
+                    <UserOutlined
+                      style={{
+                        fontSize: "23px",
+                      }}
+                    />
+                  }
                 />
-              }
-            />
+              </Dropdown>
+            </ConfigProvider>
           )}
         </Menu.Item>
 

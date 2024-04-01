@@ -54,13 +54,6 @@ function UserPage() {
     navigate("/");
   };
 
-  const handleLogOutBtnClick = () => {
-    adv.setUser(null);
-    navigate("/");
-    message.success("با موفقیت از حساب کاربری خود خارج شدید");
-    window.localStorage.clear();
-  };
-
   adv.getUserAds().map((ad) => {
     data.push({
       key: ad.houseName,
@@ -98,9 +91,6 @@ function UserPage() {
       </Descriptions>
       <h5 style={{ marginTop: "20px", padding: "15px" }}>User Ads</h5>
       <Table columns={columns} dataSource={data} />
-      <Button type="danger" onClick={handleLogOutBtnClick}>
-        Log Out
-      </Button>
     </div>
   );
 }
