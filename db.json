@@ -80,7 +80,7 @@
       "city": "تهران",
       "neighbourhood": "جوادیه",
       "houseMeterage": 60,
-      "bedroomsNum": "1",
+      "bedroomsNum": 1,
       "hasParkingSpot": "true",
       "hasWarehouse": "false",
       "floorNum": "2",
@@ -105,6 +105,12 @@
       "username": "amir",
       "password": "1234",
       "email": "amir@gmail.com"
+    },
+    {
+      "id": "50ce",
+      "username": "Ali",
+      "password": "1234",
+      "email": "Ali@gmail.com"
     }
   ]
 }

@@ -227,7 +227,7 @@ function CreateCardPage() {
           </Form.Item>
           <Form.Item
             label="سال ساخت"
-            name="BuildYear"
+            name="buildYear"
             rules={[
               {
                 required: true,
