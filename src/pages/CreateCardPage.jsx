@@ -32,7 +32,7 @@ function CreateCardPage() {
     console.log("Success:", values);
     axios
       .post("http://localhost:3000/house", {
-        id: randNum,
+        id: `${randNum}`,
         houseName: `House ${randNum}`,
         price: values.price,
         imageAddress: "/outHouse1.jpg",

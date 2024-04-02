@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useContext, useEffect } from "react";
 import { AdContext } from "../context/AdContext";
-import { Button, Descriptions, Table, message } from "antd";
+import { Descriptions, Table, message, Modal } from "antd";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 
@@ -65,7 +65,18 @@ function UserPage() {
           <EditOutlined style={{ fontSize: "17px" }} onClick={handleEdit} />
           <DeleteOutlined
             style={{ fontSize: "17px" }}
-            onClick={() => handleDelete(ad.id)}
+            onClick={() => {
+              {
+                Modal.confirm({
+                  title: "تایید حذف آگهی",
+                  okText: "تایید",
+                  cancelText: "بازگشت",
+                  onOk() {
+                    handleDelete(ad.id);
+                  },
+                });
+              }
+            }}
           />
         </div>
       ),

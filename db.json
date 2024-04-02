@@ -70,7 +70,7 @@
       "locationLng": 51.3347
     },
     {
-      "id": 4,
+      "id": "4",
       "houseName": "House 4",
       "price": "90000000",
       "imageAddress": "/outHouse7.jpg",
