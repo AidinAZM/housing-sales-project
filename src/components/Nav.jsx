@@ -31,6 +31,7 @@ export default function Nav() {
   const [open, setOpen] = useState(false);
   //states for Login modal
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+
   const [isRegisterForm, setIsRegisterForm] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
   const [filteredOptions, setFilteredOptions] = useState([]);
@@ -121,7 +122,9 @@ export default function Nav() {
   const handleSearchChange = (data) => {
     if (data != "") {
       setFilteredOptions(
-        allSearchOptionsArr.filter((opt) => opt.label == data)
+        allSearchOptionsArr.filter(
+          (opt) => opt.label.toLowerCase() == data.toLowerCase()
+        )
       );
     }
   };
@@ -172,9 +175,8 @@ export default function Nav() {
         style={{
           justifyContent: "space-between",
           position: "relative",
-          display: "flex",
+          // display: "flex",
           marginTop: "20px",
-          minWidth: "400px",
         }}
         id="#Navbar"
       >

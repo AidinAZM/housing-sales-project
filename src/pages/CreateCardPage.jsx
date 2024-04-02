@@ -82,6 +82,7 @@ function CreateCardPage() {
           }}
           style={{
             maxWidth: 600,
+            margin: "0 auto",
           }}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
@@ -253,7 +254,7 @@ function CreateCardPage() {
             <MapContainer
               center={[35.7219, 51.3347]}
               zoom={13}
-              style={{ right: 50, width: "500px" }}
+              style={{ right: 100, width: "500px" }}
             >
               <TileLayer
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

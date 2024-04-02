@@ -84,7 +84,7 @@ function UserPage() {
   });
 
   return (
-    <div>
+    <div style={{ margin: " 0 300px" }}>
       <Descriptions
         title={<span style={{ fontSize: "25px" }}>User Info</span>}
         style={{ marginTop: "20px" }}

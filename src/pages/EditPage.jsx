@@ -72,6 +72,7 @@ function EditPage() {
           }}
           style={{
             maxWidth: 600,
+            margin: "0 auto",
           }}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
@@ -249,7 +250,7 @@ function EditPage() {
                 adv.getUserAds()[0].locationLng,
               ]}
               zoom={13}
-              style={{ right: 50, width: "500px" }}
+              style={{ right: 100, width: "500px" }}
             >
               <TileLayer
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -286,7 +287,7 @@ function EditPage() {
             }}
           >
             <Button type="primary" htmlType="submit">
-              Submit
+              تایید تغییرات
             </Button>
           </Form.Item>
         </Form>

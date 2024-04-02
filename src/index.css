@@ -9,9 +9,9 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  min-width: 320px;
-  min-height: 100vh;
+  /* display: flex; */
+  /* min-width: 320px;
+  min-height: 100vh; */
   /* background-color: #f8f6f4; */
 }
 

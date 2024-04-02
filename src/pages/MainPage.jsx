@@ -196,10 +196,10 @@ export default function MainPage() {
           </div>
         </div>
 
-        <Row justify={"center"} className="mx-5 px-5 mt-3">
+        <Row justify={"center"} className="mx-5 mt-3">
           {adv.getData()[0] == undefined ? (
             <Empty
-              style={{ padding: "100px" }}
+              style={{ padding: "80px" }}
               description={<span>خانه ای با این مشخصات وجود ندارد</span>}
             />
           ) : (
@@ -211,8 +211,11 @@ export default function MainPage() {
                   md={6}
                   lg={6}
                   xl={4}
-                  className="mx-5 mt-3 px-5"
-                  style={{ display: "flex", justifyContent: "center" }}
+                  className="mx-5 mt-3 "
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                  }}
                   key={house.id}
                 >
                   <ProductCard key={house.id} data={house} />
