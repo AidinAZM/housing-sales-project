@@ -61,32 +61,34 @@ export default function Nav() {
     form.validateFields().then((values) => {
       form.resetFields();
       console.log("Received values of form: ", values);
-      if (values.email == undefined) {
+      if (values.passwordCheck == undefined) {
         axios
-          .get(
-            `http://localhost:3000/users?username=${values.username}&password=${values.password}`
-          )
+          .post("http://localhost:3000/login", {
+            email: values.email,
+            password: values.password,
+          })
           .then((res) => {
             console.log(res);
-            if (
-              res.data[0]?.username == values.username &&
-              res.data[0]?.password == values.password
-            ) {
-              message.success("با موفقیت وارد شدید");
-              adv.setUser(res.data[0]);
-              setIsUserLoggedIn(true);
-              window.localStorage.setItem(
-                "userLoggedIn",
-                JSON.stringify(res.data[0])
-              );
-            } else {
-              message.error("نام کاربری یا رمز عبور اشتباه است");
-            }
+            // if (
+            //   res.data[0]?.username == values.username &&
+            //   res.data[0]?.password == values.password
+            // ) {
+            message.success("با موفقیت وارد شدید");
+            adv.setUser(res.data.user);
+            setIsUserLoggedIn(true);
+            window.localStorage.setItem(
+              "userLoggedIn",
+              JSON.stringify(res.data.user)
+            );
+          })
+          .catch((err) => {
+            console.log(err);
+            message.error("ایمیل یا رمز عبور اشتباه است");
           });
-      } else if (values.email != undefined) {
+      } else if (values.passwordCheck != undefined) {
         if (values.passwordCheck == values.password) {
           axios
-            .post("http://localhost:3000/users", {
+            .post("http://localhost:3000/register", {
               username: values.username,
               password: values.password,
               email: values.email,

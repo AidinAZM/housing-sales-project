@@ -73,19 +73,19 @@
       "id": "4",
       "houseName": "House 4",
       "price": "90000000",
-      "imageAddress": "/outHouse7.jpg",
-      "imageAddress2": "/inHouse7.jpg",
+      "imageAddress": "/outHouse1.jpg",
+      "imageAddress2": "/inHouse1.jpg",
       "imageAddress3": "/inHouse2.jpg",
-      "imageAddress4": "/outHouse4.jpg",
+      "imageAddress4": "/outHouse2.jpg",
       "city": "تهران",
       "neighbourhood": "جوادیه",
-      "houseMeterage": 60,
-      "bedroomsNum": 1,
+      "houseMeterage": "60",
+      "bedroomsNum": "1",
       "hasParkingSpot": "true",
       "hasWarehouse": "false",
       "floorNum": "2",
-      "buildYear": "1401",
-      "Address": "تهران / جوادیه / کوچه موسوی / پلاک 10 / واحد 2 ",
+      "buildYear": "1399",
+      "Address": "تهران / جوادیه / کوچه موسوی / پلاک 12 / واحد 2",
       "ownerName": "Aidin",
       "ownerTel": "09123456789",
       "ownerMail": "fakemail4@gmail.com",
@@ -95,22 +95,22 @@
   ],
   "users": [
     {
-      "id": "1",
+      "email": "Aidin@gmail.com",
+      "password": "$2a$10$Thg0fE9.vq4Vd8HfuOw8IObuG/a0IfLcW7yTLmAAHymeSZTT39rL2",
       "username": "Aidin",
-      "password": "12345",
-      "email": "fakemail@gmail.com"
+      "id": 1
     },
     {
-      "id": "e04e",
-      "username": "amir",
-      "password": "1234",
-      "email": "amir@gmail.com"
-    },
-    {
-      "id": "50ce",
+      "email": "Ali@gmail.com",
+      "password": "$2a$10$8D3gjkzSv5Y5VO8BLUeTp.3TkAABl82N1Ty2.ds.RI6I5wNXj25Hy",
       "username": "Ali",
-      "password": "1234",
-      "email": "Ali@gmail.com"
+      "id": 2
+    },
+    {
+      "email": "reza@gmail.com",
+      "password": "$2a$10$zfMIfvwuLKoH0didCHrCW.9K0qnXgMICiuYuhZ5m0wa4mieDBU8NG",
+      "username": "reza",
+      "id": 3
     }
   ]
 }

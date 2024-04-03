@@ -93,9 +93,6 @@ function UserPage() {
         <Descriptions.Item label="نام">
           {adv.getUser().username}
         </Descriptions.Item>
-        <Descriptions.Item label="رمز عبور">
-          {adv.getUser().password}
-        </Descriptions.Item>
         <Descriptions.Item label="ایمیل">
           {adv.getUser().email}
         </Descriptions.Item>

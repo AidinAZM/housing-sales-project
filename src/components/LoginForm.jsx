@@ -62,11 +62,31 @@ export default function LoginForm({
             <Input prefix={<UserOutlined />} placeholder="نام کاربری" />
           </Form.Item>
           <Form.Item
+            name="email"
+            rules={[
+              {
+                type: "email",
+                message: "فرمت ایمیل صحیح نیست!",
+              },
+              {
+                required: true,
+                message: "لطفاً ایمیل خود را وارد کنید",
+              },
+            ]}
+          >
+            <Input placeholder="ایمیل" type="email" prefix={<MailOutlined />} />
+          </Form.Item>
+
+          <Form.Item
             name="password"
             rules={[
               {
                 required: true,
                 message: "لطفاً رمز عبور را وارد کنید!",
+              },
+              {
+                min: 4,
+                message: "رمزعبور باید حداقل 4 کاراکتر باشد",
               },
             ]}
           >
@@ -99,25 +119,6 @@ export default function LoginForm({
                   prefix={<LockOutlined />}
                   type="password"
                   placeholder="تکرار رمز عبور"
-                />
-              </Form.Item>
-              <Form.Item
-                name="email"
-                rules={[
-                  {
-                    type: "email",
-                    message: "فرمت ایمیل صحیح نیست!",
-                  },
-                  {
-                    required: true,
-                    message: "لطفاً ایمیل خود را وارد کنید",
-                  },
-                ]}
-              >
-                <Input
-                  placeholder="ایمیل"
-                  type="email"
-                  prefix={<MailOutlined />}
                 />
               </Form.Item>
             </>
