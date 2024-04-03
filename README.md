@@ -4,10 +4,11 @@ front-end part of a simple housing-sale app created using React(18) with the hel
 
 <code> npm install </code>
 
-for running json-server locally on Port 3000
+for running json-server and json-server-auth locally on Port 3000
 
-<code>npm install json-server </code>
-<code>npx json-server db.json </code>
+<code>npm install json-server@0.17.4 </code>
+<code>npm install json-server-auth </code>
+<code>npx json-server db.json -m ./node_modules/json-server-auth </code>
 
 and then
 
