@@ -8,6 +8,7 @@ for running json-server and json-server-auth locally on Port 3000
 
 <code>npm install json-server@0.17.4 </code>
 <code>npm install json-server-auth </code>
+
 <code>npx json-server db.json -m ./node_modules/json-server-auth </code>
 
 and then
